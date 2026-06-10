@@ -1,530 +1,358 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Lemaire Clothing Apprenticeship Agreement Submission Form - Apply for apprenticeship training at Lemaire Clothing facility.">
-    <title>Lemaire Clothing | Apprenticeship Agreement Form</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <!-- html2pdf for PDF generation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lemaire Clothing Ventures — Apprentice Registration</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Josefin+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <!-- Background decorations -->
-    <div class="bg-decoration">
-        <div class="bg-circle bg-circle-1"></div>
-        <div class="bg-circle bg-circle-2"></div>
-        <div class="bg-circle bg-circle-3"></div>
+<!-- LOADING -->
+<div class="loading-overlay" id="loadingOverlay">
+  <div class="spinner"></div>
+  <div class="loading-text">Generating PDF…</div>
+</div>
+
+<!-- CODE OF CONDUCT MODAL -->
+<div class="modal-overlay" id="conductModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title">Code of Conduct</div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="conduct-section">
+        <h3>Hours of Work</h3>
+        <div class="conduct-highlight">You shall be required to work from 7 am in the morning to 8 pm in the evening per day and six days in a week depending on the facility's shift system.</div>
+        <p><em>Public holidays</em> are not regarded as such for the facility but off-days will be enjoyed by apprentices as and when it is appropriate and communicated by your Master.</p>
+      </div>
+      <div class="conduct-section">
+        <h3>Confidential Information</h3>
+        <ol>
+          <li>During your apprenticeship with the facility you will devote your whole time, attention and skills to the best of your ability for the enhancement of the facility.</li>
+          <li>You must always maintain the highest degree of confidential information relating to the business/facility which may be known to you or confined in you by any means.</li>
+        </ol>
+      </div>
+      <div class="conduct-section">
+        <h3>Caution</h3>
+        <ol>
+          <li>You should not receive any payments/gifts from any clients/customers without the consent and concurrence of the Master.</li>
+          <li>Breach of any of the clauses above, you will first be entitled to a fair hearing by Master of the facility; if found guilty then will render you liable to summary dismissal, in addition to any other remedy the company may have against you in law court.</li>
+        </ol>
+      </div>
+      <div class="conduct-section">
+        <h3>Vacation of Post</h3>
+        <div class="conduct-highlight">If you absent yourself from duty without permission from Master for a period amounting to five (5) working days, it simply means that you have automatically vacated your post with the facility.</div>
+      </div>
+      <div class="conduct-section">
+        <h3>Discipline</h3>
+        <ol>
+          <li>If you commit an act of indiscipline, then you shall be subjected to disciplinary action by the Master of the facility.</li>
+          <li>If you commit an act of indiscipline, then you shall be given the opportunity to exonerate yourself in writing within 48hrs after being queried verbally/in writing.</li>
+          <li>Where the answer to the query is not satisfactory, then you shall be given a warning in writing.</li>
+          <li>Where two (2) warning letters are issued to you within a period of 12 months, your 3rd warning letter shall terminate your contract.</li>
+        </ol>
+      </div>
+      <div class="conduct-section">
+        <h3>Acts That Amount to Summary Dismissal</h3>
+        <p>You shall be summarily dismissed by the Master of the facility for:</p>
+        <ol>
+          <li>Proven dishonesty or fraud, theft or stealing</li>
+          <li>Vacation of post</li>
+          <li>Any act/acts that are not in conformity with rules and regulations of the facility</li>
+          <li>Willful refusal to obey legitimate and lawful institutions</li>
+          <li>Persistent drunkenness</li>
+          <li>Negligent of duty</li>
+          <li>Absenteeism</li>
+        </ol>
+      </div>
+      <div class="conduct-section">
+        <h3>Grievances Procedure</h3>
+        <ol>
+          <li>You shall be required to report to your immediate Chief Apprentice.</li>
+          <li>If you are not satisfied with the decision or ruling of your immediate Chief Apprentice, then you shall take the matter up to the Master of the facility for a final decision.</li>
+        </ol>
+      </div>
+      <div class="conduct-section">
+        <h3>Offences and Punishment</h3>
+        <ol>
+          <li><strong>Conversion of facility property</strong> — It shall be a gross misconduct and tantamount to summary dismissal for you to convert to personal use the facility's property such as money, tools and equipment without approval from Master of the facility.</li>
+          <li><strong>Fraudulent claim or fraudulent receipts of money or undue benefit</strong> — It is an act of gross misconduct carrying the penalty of summary dismissal for staff knowingly and willfully to claim and receive monies, which they know, they are not entitled to.</li>
+          <li><strong>Selling the facility's property and services</strong> — This constitutes gross misconduct.</li>
+          <li><strong>Taking of alcoholic drinks on duty</strong> — It is an offence carrying the penalty of summary dismissal for a worker to attend or to be found at work under the influence of alcohol.</li>
+        </ol>
+      </div>
+      <div class="conduct-section">
+        <h3>Neglect of Duty</h3>
+        <div class="conduct-highlight">Workers shall be guilty of gross neglect of his/her duties if duties are not performed without lawful or reasonable excuse. This will be liable to summary dismissal.</div>
+      </div>
+      <div class="conduct-section">
+        <h3>Offence of Quarreling or Brawling</h3>
+        <p>It is an offence to quarrel or engage in any form of brawling whilst on duty. The punishment for such an offence shall be a warning letter or suspension.</p>
+      </div>
+      <div class="conduct-section">
+        <h3>Offence of Fighting</h3>
+        <p>It is an offence carrying the penalty of summary dismissal for an employee to fight, exchange blows or engage in any form of fighting during working hours.</p>
+      </div>
+      <div class="conduct-section">
+        <h3>Sexual Misconduct</h3>
+        <p>Punishment: Withdrawal from the facility.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-ornament">Est. Konongo — Odumase A/A</div>
+  <div class="header-brand">Lemaire Clothing Ventures</div>
+  <div class="header-sub">Ashanti / Ghana · Elegance Collection</div>
+  <div class="gold-line"></div>
+  <div class="header-tagline">Apprentice Registration Portal</div>
+</header>
+
+<!-- PROGRESS BAR -->
+<div class="progress-wrap" id="progressBar">
+  <div class="step active" id="step1">
+    <div class="step-num">1</div>
+    <span>Application</span>
+  </div>
+  <div class="step-connector"></div>
+  <div class="step" id="step2">
+    <div class="step-num">2</div>
+    <span>Confirmation</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="container">
+
+  <!-- ════ FORM SCREEN ════ -->
+  <div id="form-screen">
+    <div class="section-label">Step 01 of 02</div>
+    <div class="section-title">Personal Record Form</div>
+
+    <form id="registrationForm" novalidate>
+
+      <!-- SECTION A -->
+      <div class="form-card">
+        <div class="card-heading">Section A — Apprentice Information</div>
+
+        <!-- Passport Photo -->
+        <div class="field-group">
+          <label>Passport Photograph <span class="req">*</span></label>
+          <div class="photo-upload-area" id="photoArea" onclick="document.getElementById('photoInput').click()">
+            <input type="file" id="photoInput" accept="image/*" required onchange="previewPhoto(this)">
+            <img id="photoPreview" class="photo-preview" alt="Preview">
+            <span class="photo-icon" id="photoIcon">📷</span>
+            <div class="photo-text" id="photoText"><strong>Click to upload</strong> passport size photograph</div>
+          </div>
+          <div class="field-error" id="err-photo">Please upload your passport photograph.</div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="surname">Surname <span class="req">*</span></label>
+            <input type="text" id="surname" placeholder="e.g. Asante" required>
+            <div class="field-error" id="err-surname">This field is required.</div>
+          </div>
+          <div class="field-group">
+            <label for="firstName">First Name <span class="req">*</span></label>
+            <input type="text" id="firstName" placeholder="e.g. Kofi" required>
+            <div class="field-error" id="err-firstName">This field is required.</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="otherNames">Other Names</label>
+          <input type="text" id="otherNames" placeholder="Middle name or other names (optional)">
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label for="dob">Date of Birth <span class="req">*</span></label>
+            <input type="date" id="dob" required>
+            <div class="field-error" id="err-dob">This field is required.</div>
+          </div>
+          <div class="field-group">
+            <label for="nationality">Nationality <span class="req">*</span></label>
+            <input type="text" id="nationality" placeholder="e.g. Ghanaian" required>
+            <div class="field-error" id="err-nationality">This field is required.</div>
+          </div>
+        </div>
+
+        <div class="field-row-3">
+          <div class="field-group">
+            <label for="hometown">Hometown <span class="req">*</span></label>
+            <input type="text" id="hometown" placeholder="e.g. Kumasi" required>
+            <div class="field-error" id="err-hometown">This field is required.</div>
+          </div>
+          <div class="field-group">
+            <label for="district">District <span class="req">*</span></label>
+            <input type="text" id="district" placeholder="e.g. Ashanti" required>
+            <div class="field-error" id="err-district">This field is required.</div>
+          </div>
+          <div class="field-group">
+            <label for="region">Region <span class="req">*</span></label>
+            <input type="text" id="region" placeholder="e.g. Ashanti Region" required>
+            <div class="field-error" id="err-region">This field is required.</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="religion">Religious Denomination <span class="req">*</span></label>
+          <input type="text" id="religion" placeholder="e.g. Christian, Muslim, etc." required>
+          <div class="field-error" id="err-religion">This field is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="lastSchool">Last School Attended & Form Completed <span class="req">*</span></label>
+          <input type="text" id="lastSchool" placeholder="e.g. Kumasi Polytechnic — HND Level 2" required>
+          <div class="field-error" id="err-lastSchool">This field is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="hobbies">Hobbies / Interests <span class="req">*</span></label>
+          <textarea id="hobbies" placeholder="Describe your hobbies and interests..." required></textarea>
+          <div class="field-error" id="err-hobbies">This field is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="telephone">Telephone <span class="req">*</span></label>
+          <input type="tel" id="telephone" placeholder="e.g. 0244 000 000" required>
+          <div class="field-error" id="err-telephone">This field is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="signature">Signature (Enter Your Full Name) <span class="req">*</span></label>
+          <div class="sig-note">Type your full name as your legal signature for this form.</div>
+          <input type="text" id="signature" placeholder="Full name as signature" required style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; letter-spacing:1px;">
+          <div class="field-error" id="err-signature">Please enter your full name as signature.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="sigDate">Date <span class="req">*</span></label>
+          <input type="date" id="sigDate" required>
+          <div class="field-error" id="err-sigDate">This field is required.</div>
+        </div>
+
+      </div><!-- /card -->
+
+      <!-- SECTION B -->
+      <div class="form-card">
+        <div class="card-heading">Section B — Parent / Guardian Information</div>
+
+        <div class="field-group">
+          <label for="fatherName">Father's Full Name <span class="req">*</span></label>
+          <input type="text" id="fatherName" placeholder="Father's full name" required>
+          <div class="field-error" id="err-fatherName">This field is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="motherName">Mother's Full Name <span class="req">*</span></label>
+          <input type="text" id="motherName" placeholder="Mother's full name" required>
+          <div class="field-error" id="err-motherName">This field is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="guardianName">Full Name of Guardian <span class="req">*</span></label>
+          <input type="text" id="guardianName" placeholder="Guardian's full name" required>
+          <div class="field-error" id="err-guardianName">This field is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="relationship">Relationship with Apprentice <span class="req">*</span></label>
+          <input type="text" id="relationship" placeholder="e.g. Parent, Uncle, Aunt, Sibling..." required>
+          <div class="field-error" id="err-relationship">This field is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="guardianAddress">Permanent Address of Guardian <span class="req">*</span></label>
+          <textarea id="guardianAddress" placeholder="Full permanent address..." required></textarea>
+          <div class="field-error" id="err-guardianAddress">This field is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="guardianTel">Guardian's Telephone <span class="req">*</span></label>
+          <input type="tel" id="guardianTel" placeholder="e.g. 0244 000 000" required>
+          <div class="field-error" id="err-guardianTel">This field is required.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="guardianSignature">Guardian's Signature (Enter Full Name) <span class="req">*</span></label>
+          <div class="sig-note">Guardian must type their full name as legal signature.</div>
+          <input type="text" id="guardianSignature" placeholder="Guardian's full name as signature" required style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; letter-spacing:1px;">
+          <div class="field-error" id="err-guardianSignature">Please enter guardian's full name as signature.</div>
+        </div>
+
+        <div class="field-group">
+          <label for="guardianDate">Date <span class="req">*</span></label>
+          <input type="date" id="guardianDate" required>
+          <div class="field-error" id="err-guardianDate">This field is required.</div>
+        </div>
+
+        <!-- Admin WhatsApp note -->
+        <div class="field-group" style="margin-top:24px; padding-top:24px; border-top:1px solid #2a2a2a;">
+          <div style="font-size:12px;color:#666;letter-spacing:0.5px;line-height:1.8;">
+            💬 <strong style="color:#888;">Note:</strong> Upon submission, a completed PDF copy of this form will be downloaded automatically. You will then be prompted to send it to the admin via WhatsApp.
+          </div>
+        </div>
+
+      </div><!-- /card -->
+
+      <button type="submit" class="btn-submit">Submit Application & Send via WhatsApp</button>
+    </form>
+  </div>
+
+  <!-- ════ SUCCESS SCREEN ════ -->
+  <div id="success-screen">
+    <div class="success-banner">
+      <div class="success-icon">✦</div>
+      <div class="success-title">Application Submitted</div>
+      <div class="success-msg">
+        Your PDF has been downloaded successfully.<br>
+        Please click the button below to send your details to the admin via WhatsApp, then attach the downloaded PDF in the chat.
+      </div>
+      <a class="btn-download" id="whatsappBtn" target="_blank" style="background: linear-gradient(135deg, #25D366, #128C7E); color: white; margin-bottom: 10px;">💬 Notify Admin on WhatsApp</a>
+      <a class="btn-download" id="redownloadBtn">⬇ Re-download PDF</a>
     </div>
 
-    <!-- Header -->
-    <header id="main-header">
-        <div class="header-content">
-            <div class="brand">
-                <div class="brand-icon">
-                    <img src="logo.png" alt="Lemaire Clothing Logo" class="header-logo">
-                </div>
-                <div class="brand-text">
-                    <h1>Lemaire Clothing</h1>
-                    <p>Apprenticeship Programme</p>
-                </div>
-            </div>
-            <div class="header-badge">
-                <span class="badge-dot"></span>
-                Now Accepting Applications
-            </div>
-        </div>
-    </header>
+    <div class="items-card">
+      <div class="card-heading">Items to Be Submitted by Apprentice</div>
+      <p style="font-size:13px;color:#888;line-height:1.8;">Please ensure you bring <strong style="color:var(--cream)">all</strong> of the following items when reporting to the facility:</p>
 
-    <!-- Main Content -->
-    <main id="main-content">
+      <div class="fee-note">
+        💰 <strong>Apprenticeship Fee:</strong> An amount of <strong>GHC ____________</strong> (as communicated by your Master) is required upon enrollment.
+      </div>
 
-        <!-- ==================== STEP 1: PERSONAL RECORD FORM ==================== -->
-        <section id="form-section" class="content-section active">
-            <div class="section-header">
-                <div class="step-indicator">
-                    <div class="step active" data-step="1">
-                        <span class="step-num">1</span>
-                        <span class="step-label">Personal Record</span>
-                    </div>
-                    <div class="step-line"></div>
-                    <div class="step" data-step="2">
-                        <span class="step-num">2</span>
-                        <span class="step-label">Items & Fees</span>
-                    </div>
-                    <div class="step-line"></div>
-                    <div class="step" data-step="3">
-                        <span class="step-num">3</span>
-                        <span class="step-label">Code of Conduct</span>
-                    </div>
-                </div>
-                <h2 class="section-title">
-                    <span class="title-accent">Personal</span> Record Form
-                </h2>
-                <p class="section-subtitle">To be completed and returned to Master</p>
-            </div>
+      <div class="items-grid">
+        <div class="item-badge">1 Crate of Minerals</div>
+        <div class="item-badge">1 Packet of Tape Measure</div>
+        <div class="item-badge">2 Boxes of Tailors Chalk</div>
+        <div class="item-badge">Uniforms</div>
+        <div class="item-badge">1 Chair for Him/Herself</div>
+        <div class="item-badge">A Drawing Book</div>
+        <div class="item-badge">Late Fee (Woamant3m Nsa)</div>
+        <div class="item-badge">Seam Ripper</div>
+        <div class="item-badge">Scissors</div>
+        <div class="item-badge">Industrial Sewing Machine</div>
+        <div class="item-badge">Office Pins</div>
+        <div class="item-badge">A Box of Pencils</div>
+      </div>
 
-            <form id="apprentice-form" novalidate>
-                <!-- Section A -->
-                <div class="form-card" id="section-a-card">
-                    <div class="card-header">
-                        <div class="card-badge">Section A</div>
-                        <h3>To Be Completed By Apprentice</h3>
-                    </div>
+      <div class="material-note">
+        🧵 <strong>Rehearsal Material:</strong> Any cheap material for rehearsals — 6 yards required. <em>Note: you will be required to buy another one if you are not able to meet the Master's standard of perfection.</em>
+      </div>
+    </div>
 
-                    <div class="form-grid">
-                        <div class="form-group full-width photo-upload-group">
-                            <label>Applicant Photo (Clear Face) <span class="required">*</span></label>
-                            <div class="photo-upload-wrapper">
-                                <div class="photo-preview" id="photo-preview">
-                                    <span>No photo</span>
-                                </div>
-                                <div class="photo-input-controls">
-                                    <input type="file" id="applicantPhoto" name="applicantPhoto" accept="image/*" required class="file-input">
-                                    <label for="applicantPhoto" class="btn btn-secondary btn-sm">Choose Photo</label>
-                                    <span class="file-name" id="photo-file-name"></span>
-                                    <span class="field-error" id="applicantPhoto-error"></span>
-                                </div>
-                            </div>
-                        </div>
+    <button class="btn-conduct" onclick="openModal()">📋 Read the Code of Conduct</button>
+  </div>
 
-                        <div class="form-group">
-                            <label for="surname">1. Surname <span class="required">*</span></label>
-                            <input type="text" id="surname" name="surname" required placeholder="Enter your surname" autocomplete="family-name">
-                            <span class="field-error" id="surname-error"></span>
-                        </div>
+</main>
 
-                        <div class="form-group">
-                            <label for="firstName">2. First Name <span class="required">*</span></label>
-                            <input type="text" id="firstName" name="firstName" required placeholder="Enter your first name" autocomplete="given-name">
-                            <span class="field-error" id="firstName-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="otherNames">3. Other Names</label>
-                            <input type="text" id="otherNames" name="otherNames" placeholder="Enter other names (if any)" autocomplete="additional-name">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="dob">4. Date of Birth <span class="required">*</span></label>
-                            <input type="date" id="dob" name="dob" required autocomplete="bday">
-                            <span class="field-error" id="dob-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="nationality">5. Nationality <span class="required">*</span></label>
-                            <input type="text" id="nationality" name="nationality" required placeholder="e.g. Ghanaian">
-                            <span class="field-error" id="nationality-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="district">District <span class="required">*</span></label>
-                            <input type="text" id="district" name="district" required placeholder="Enter your district">
-                            <span class="field-error" id="district-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="hometown">Hometown <span class="required">*</span></label>
-                            <input type="text" id="hometown" name="hometown" required placeholder="Enter your hometown">
-                            <span class="field-error" id="hometown-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="region">Region <span class="required">*</span></label>
-                            <input type="text" id="region" name="region" required placeholder="Enter your region">
-                            <span class="field-error" id="region-error"></span>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="religion">6. Religious Denomination</label>
-                            <input type="text" id="religion" name="religion" placeholder="Enter your religious denomination">
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="lastSchool">7. Last School Attended and Form Completed <span class="required">*</span></label>
-                            <input type="text" id="lastSchool" name="lastSchool" required placeholder="e.g. Konongo Odumase SHS, Form 3">
-                            <span class="field-error" id="lastSchool-error"></span>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="hobbies">8. Hobbies / Interests</label>
-                            <textarea id="hobbies" name="hobbies" rows="3" placeholder="Tell us about your hobbies and interests..."></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="apprenticeSignature">9. Signature (Type Full Name) <span class="required">*</span></label>
-                            <div class="signature-input-wrapper">
-                                <input type="text" id="apprenticeSignature" name="apprenticeSignature" required placeholder="Type your full name as signature" class="signature-field">
-                                <span class="signature-icon">✍</span>
-                            </div>
-                            <span class="field-error" id="apprenticeSignature-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="apprenticeTelephone">Telephone <span class="required">*</span></label>
-                            <input type="tel" id="apprenticeTelephone" name="apprenticeTelephone" required placeholder="e.g. 0241234567" autocomplete="tel">
-                            <span class="field-error" id="apprenticeTelephone-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="apprenticeDate">Date <span class="required">*</span></label>
-                            <input type="date" id="apprenticeDate" name="apprenticeDate" required>
-                            <span class="field-error" id="apprenticeDate-error"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Section B -->
-                <div class="form-card" id="section-b-card">
-                    <div class="card-header">
-                        <div class="card-badge card-badge-alt">Section B</div>
-                        <h3>To Be Completed By Parent / Guardian</h3>
-                    </div>
-
-                    <div class="form-grid">
-                        <div class="form-group full-width">
-                            <label for="fatherName">1. Father's Full Name <span class="required">*</span></label>
-                            <input type="text" id="fatherName" name="fatherName" required placeholder="Enter father's full name">
-                            <span class="field-error" id="fatherName-error"></span>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="motherName">2. Mother's Full Name <span class="required">*</span></label>
-                            <input type="text" id="motherName" name="motherName" required placeholder="Enter mother's full name">
-                            <span class="field-error" id="motherName-error"></span>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="guardianName">3. Full Name of Guardian <span class="required">*</span></label>
-                            <input type="text" id="guardianName" name="guardianName" required placeholder="Enter guardian's full name">
-                            <span class="field-error" id="guardianName-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="relationship">4. Relationship with Apprentice <span class="required">*</span></label>
-                            <input type="text" id="relationship" name="relationship" required placeholder="e.g. Father, Mother, Uncle">
-                            <span class="field-error" id="relationship-error"></span>
-                        </div>
-
-                        <div class="form-group full-width">
-                            <label for="guardianAddress">5. Permanent Address of Guardian <span class="required">*</span></label>
-                            <textarea id="guardianAddress" name="guardianAddress" rows="3" required placeholder="Enter guardian's permanent address"></textarea>
-                            <span class="field-error" id="guardianAddress-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="guardianSignature">6. Guardian's Signature (Type Full Name) <span class="required">*</span></label>
-                            <div class="signature-input-wrapper">
-                                <input type="text" id="guardianSignature" name="guardianSignature" required placeholder="Type guardian's full name as signature" class="signature-field">
-                                <span class="signature-icon">✍</span>
-                            </div>
-                            <span class="field-error" id="guardianSignature-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="guardianTelephone">Telephone <span class="required">*</span></label>
-                            <input type="tel" id="guardianTelephone" name="guardianTelephone" required placeholder="e.g. 0241234567" autocomplete="tel">
-                            <span class="field-error" id="guardianTelephone-error"></span>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="guardianDate">Date <span class="required">*</span></label>
-                            <input type="date" id="guardianDate" name="guardianDate" required>
-                            <span class="field-error" id="guardianDate-error"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <button type="submit" id="submit-form-btn" class="btn btn-primary btn-lg">
-                        <span class="btn-text">Submit Application</span>
-                        <span class="btn-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </span>
-                        <span class="btn-loader" style="display:none;">
-                            <svg width="20" height="20" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" fill="none" stroke-dasharray="31.4 31.4" stroke-linecap="round"><animateTransform attributeName="transform" type="rotate" dur="0.8s" from="0 12 12" to="360 12 12" repeatCount="indefinite"/></circle></svg>
-                        </span>
-                    </button>
-                </div>
-            </form>
-        </section>
-
-        <!-- ==================== STEP 2: ITEMS & FEES ==================== -->
-        <section id="items-section" class="content-section">
-            <div class="section-header">
-                <div class="step-indicator">
-                    <div class="step completed" data-step="1">
-                        <span class="step-num">✓</span>
-                        <span class="step-label">Personal Record</span>
-                    </div>
-                    <div class="step-line completed"></div>
-                    <div class="step active" data-step="2">
-                        <span class="step-num">2</span>
-                        <span class="step-label">Items & Fees</span>
-                    </div>
-                    <div class="step-line"></div>
-                    <div class="step" data-step="3">
-                        <span class="step-num">3</span>
-                        <span class="step-label">Code of Conduct</span>
-                    </div>
-                </div>
-                <h2 class="section-title">
-                    <span class="title-accent">Items</span> to be Submitted
-                </h2>
-                <p class="section-subtitle">List of required items and fees for the apprenticeship programme</p>
-            </div>
-
-            <div class="items-card">
-                <div class="items-card-inner">
-                    <div class="card-header items-header">
-                        <div class="card-badge card-badge-gold">NOTE</div>
-                        <h3>List of Items to be Submitted by the Apprentice</h3>
-                    </div>
-
-                    <div class="items-list">
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">1 Crate of Minerals</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">Uniforms</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">Late Fee (woamantɛm Nsa)</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">Industrial Sewing Machine</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">Any cheap material for rehearsals – 6 yards <span class="item-note">(will buy another one if only he/she was not able to meet my demand of perfection)</span></span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">1 Packet of Tape Measure</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">1 Chair for Him/Her Self</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">Seam Ripper</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">Office Pins</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">2 Boxes of Tailors Chalk</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">A Drawing Book</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">Scissors</span>
-                        </div>
-                        <div class="item-row">
-                            <span class="item-bullet">●</span>
-                            <span class="item-text">A Box of a Pencil</span>
-                        </div>
-                    </div>
-
-                    <!-- Fee Breakdown -->
-                    <div class="fee-section">
-                        <h4 class="fee-title">Fee Information</h4>
-                        <div class="fee-table">
-                            <div class="fee-row">
-                                <span class="fee-label">Apprenticeship Fee (Principal Amount)</span>
-                                <span class="fee-amount">GHS 3,000</span>
-                            </div>
-                            <div class="fee-row">
-                                <span class="fee-label">Uniform</span>
-                                <span class="fee-amount">GHS 1,200</span>
-                            </div>
-                            <div class="fee-row">
-                                <span class="fee-label">Late Fee (woamantɛm Nsa)</span>
-                                <span class="fee-amount">GHS 800</span>
-                            </div>
-                            <div class="fee-divider"></div>
-                            <div class="fee-row fee-total">
-                                <span class="fee-label">Total</span>
-                                <span class="fee-amount">GHS 5,000</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-actions">
-                    <button type="button" id="accept-items-btn" class="btn btn-primary btn-lg">
-                        <span class="btn-text">I Acknowledge & Continue</span>
-                        <span class="btn-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== STEP 3: CODE OF CONDUCT ==================== -->
-        <section id="conduct-section" class="content-section">
-            <div class="section-header">
-                <div class="step-indicator">
-                    <div class="step completed" data-step="1">
-                        <span class="step-num">✓</span>
-                        <span class="step-label">Personal Record</span>
-                    </div>
-                    <div class="step-line completed"></div>
-                    <div class="step completed" data-step="2">
-                        <span class="step-num">✓</span>
-                        <span class="step-label">Items & Fees</span>
-                    </div>
-                    <div class="step-line completed"></div>
-                    <div class="step active" data-step="3">
-                        <span class="step-num">3</span>
-                        <span class="step-label">Code of Conduct</span>
-                    </div>
-                </div>
-                <h2 class="section-title">
-                    <span class="title-accent">Code</span> of Conduct
-                </h2>
-                <p class="section-subtitle">Please review the code of conduct for apprentices at Lemaire Clothing</p>
-            </div>
-
-            <div class="conduct-card">
-                <div class="conduct-content" id="conduct-content">
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Hours of Work</h4>
-                        <p>You shall be required to work from <strong>7:00 AM</strong> in the morning to <strong>8:00 PM</strong> in the evening per day and six days in a week depending on the facility's shift system.</p>
-                        <p><strong>Public Holidays</strong> – Public holidays are not regarded as such for the facility but off-days will be enjoyed by apprentices as and when it is appropriate and communicated by your Master.</p>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Confidential Information</h4>
-                        <p>During your apprenticeship with the facility you will devote your whole time, attention and skills to the best of your ability for the enhancement of the facility.</p>
-                        <p>You must always maintain the highest degree of confidential information relating to the business/facility which may be known to you or confided in you by any means.</p>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Caution</h4>
-                        <p>You should not receive any payments/gifts from any clients/customer without the consent and concurrence of the Master.</p>
-                        <p>Breach of any of the clauses above, you will first be entitled to a fair hearing by Master of the facility, if found guilty then will render you liable to summary dismissal, in addition to any other remedy the company may have against you in law court.</p>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Vacation of Post</h4>
-                        <p>If you absent yourself from duty without permission from Master for a period amounting to five (5) working days, it simply means that you have automatically vacated your post with the facility.</p>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Discipline</h4>
-                        <ul>
-                            <li>If you commit an act of indiscipline, then you shall be subjected to disciplinary action by the Master of the facility.</li>
-                            <li>If you commit an act of indiscipline, then you shall be given the opportunity to exonerate yourself in writing within 48hrs after being queried verbally/in writing.</li>
-                            <li>Where the answer to the query is not satisfactory, then you shall be given a warning in writing.</li>
-                            <li>Where two (2) warning letters are issued to you within a period of 12 months, your 3rd warning letter shall terminate your contract.</li>
-                        </ul>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Acts That Amount to Summary Dismissal</h4>
-                        <p>You shall be summarily dismissed by the Master of the facility for:</p>
-                        <ul>
-                            <li>Proven dishonesty or fraud, theft or stealing.</li>
-                            <li>Vacation of post.</li>
-                            <li>Any act/acts that are not in conformity with rules and regulations of the facility.</li>
-                            <li>Wilful refusal to obey legitimate and lawful instructions.</li>
-                            <li>Persistent drunkenness.</li>
-                            <li>Negligent of duty.</li>
-                            <li>Absenteeism.</li>
-                        </ul>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Grievances Procedure</h4>
-                        <ul>
-                            <li>You shall be required to report to your immediate Chief Apprentice.</li>
-                            <li>If you are not satisfied with the decision or ruling of your immediate Chief Apprentice then, you shall take the matter up to the Master of the facility for a final decision.</li>
-                        </ul>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Offences and Punishment</h4>
-                        <ul>
-                            <li><strong>Conversion of facility property</strong> – it shall be a gross misconduct and tantamount to summary dismissal for you to convert to personal use of the facility's such as money, tools and equipment without approval from Master of the facility.</li>
-                            <li><strong>Fraudulent claim or fraudulent receipts</strong> – it is an act of gross misconduct carrying the penalty of summary dismissal for staff knowingly and wilfully to claim and receive monies, which they know, they are not entitled to.</li>
-                            <li><strong>Selling the facility's property and services.</strong></li>
-                            <li><strong>Taking of alcoholic drinks on duty</strong> – it is an offence carrying the penalty of summary dismissal for a worker to attend or to be found at work under influence of alcohol.</li>
-                        </ul>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Neglect of Duty</h4>
-                        <p>Workers shall be guilty of gross neglect of his/her duties are not performed without lawful or reasonable excuse will be liable to summary dismissal.</p>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Offence of Quarreling or Brawling</h4>
-                        <p>It is an offence to quarrel or engage in any form of brawling whilst on duty. The punishment for such an offence shall be a warning letter or suspension.</p>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Offence of Fighting</h4>
-                        <p>It is an offence carrying the penalty of summary dismissal for an employee to fight, exchange blows or engage in any form of fighting during working hours.</p>
-                    </div>
-
-                    <div class="conduct-block">
-                        <h4 class="conduct-heading">Sexual Misconduct</h4>
-                        <p>Withdrawal from the facility.</p>
-                    </div>
-                </div>
-
-                <!-- Success & Download Area -->
-                <div class="conduct-actions">
-                    <div class="success-message" id="success-message">
-                        <div class="success-icon">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                        </div>
-                        <h3>Application Submitted Successfully!</h3>
-                        <p>Your apprenticeship application has been received. Download your copy of the agreement below.</p>
-                    </div>
-
-                    <button type="button" id="download-btn" class="btn btn-download btn-lg">
-                        <span class="btn-icon-left">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        </span>
-                        <span class="btn-text">Download Agreement (PDF)</span>
-                    </button>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer id="main-footer">
-        <div class="footer-content">
-            <p>&copy; 2026 Lemaire Clothing. All rights reserved.</p>
-            <p class="footer-sub">Apprenticeship Programme — Konongo, Ghana</p>
-        </div>
-    </footer>
-
-    <!-- Hidden PDF Template -->
-    <div id="pdf-template" style="display:none;"></div>
-
-    <script src="script.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>

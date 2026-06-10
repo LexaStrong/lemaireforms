@@ -1,57 +1,90 @@
-# Lemaire Clothing Apprenticeship Submission Form
+# Lemaire Clothing Ventures — Apprentice Registration Portal
 
-A modern, dynamic, and multi-step digital application form designed specifically for the Lemaire Clothing Apprenticeship Programme.
+A premium, dark-themed apprentice registration form for **Lemaire Clothing Ventures**, a tailoring facility based in Konongo–Odumase A/A, Ashanti Region, Ghana.
 
-## 🌟 Features
+## ✨ Features
 
-- **Multi-Step Flow**: Seamlessly guides applicants through the Personal Record Form, Required Items & Fees acknowledgment, and the Code of Conduct.
-- **Premium UI/UX**: Dark-themed aesthetic featuring gold accents, subtle glassmorphism effects, and smooth micro-animations for a high-end brand feel.
-- **Photo Upload**: Allows applicants to upload a clear face picture with a live preview before submission.
-- **Digital Signatures**: Custom signature inputs that render the applicant's typed name in elegant cursive writing.
-- **Instant PDF Generation**: Automatically generates a highly formatted, downloadable PDF containing all submitted personal data, the applicant's photo, the brand logo, fee breakdown, and the full code of conduct.
-- **Direct Email Submission**: Uses EmailJS to directly email the submitted application data to the administrator (`iamlexastrong@gmail.com`). Includes an automatic `mailto:` fallback if EmailJS is not configured.
-- **Fully Responsive**: Optimized for perfect usability across desktop, tablet, and mobile devices.
-
-## 🛠️ Technology Stack
-
-- **HTML5**: Semantic structure and layout.
-- **CSS3 (Vanilla)**: Custom properties, Flexbox/Grid layouts, and CSS animations. No external frameworks used.
-- **JavaScript (Vanilla)**: Form validation, state management, file handling, and API integration.
-- **[html2pdf.js](https://ekoopmans.github.io/html2pdf.js/)**: Client-side conversion of HTML to PDF.
-- **[EmailJS](https://www.emailjs.com/)**: Client-side email dispatching without a backend server.
-
-## 🚀 Running Locally
-
-You do not need a build step or Node.js environment to run this project. Simply serve the directory using any basic web server to avoid CORS issues when generating the PDF.
-
-Using Python (Recommended):
-```bash
-# Navigate to the project directory
-cd "lemaire submission form"
-
-# Start a local web server
-python3 -m http.server 8090
-```
-
-Then, open your browser and navigate to `http://localhost:8090`.
-
-## 📧 EmailJS Setup (Required for direct emails)
-
-Currently, the form is set up with placeholders for EmailJS. To enable direct email delivery in the background (preventing the fallback to the user's default email app):
-
-1. Go to [EmailJS](https://www.emailjs.com/) and create a free account.
-2. Add an **Email Service** (e.g., connect your Gmail account).
-3. Create an **Email Template** with the following variable in the body: `{{{message}}}`.
-4. Open `script.js` in your code editor.
-5. Replace the placeholder values at the top of the file:
-   - Replace `'YOUR_EMAILJS_PUBLIC_KEY'` (around line 7).
-   - Replace `'YOUR_SERVICE_ID'` (around line 128).
-   - Replace `'YOUR_TEMPLATE_ID'` (around line 128).
+- **Multi-step registration form** with real-time validation
+- **Passport photo upload** with live preview
+- **Automatic PDF generation** — a styled, branded PDF record is generated client-side using jsPDF
+- **WhatsApp submission** — opens WhatsApp with a pre-filled message to the admin (`+233248293815`) containing the applicant's key details
+- **Google Apps Script backend** — submits form data + PDF to a backend that:
+  - Saves the PDF to Google Drive
+  - Logs submission details to a Google Sheet
+  - Emails the admin with the PDF attached
+- **Code of Conduct modal** — displays facility rules and regulations
+- **Items checklist** — shows required items the apprentice must bring upon enrollment
+- **Responsive design** — works across desktop and mobile devices
 
 ## 📁 Project Structure
 
-- `index.html`: The main markup file containing the 3-step form.
-- `style.css`: The central stylesheet for the entire application.
-- `script.js`: Handles validation, file reading, EmailJS dispatch, and PDF generation.
-- `logo.png`: The Joejo Lemaire brand logo used in the header and PDF.
-# lemaireforms
+```
+lm-apprentice-form/
+├── index.html              # Main HTML (form, success screen, modal)
+├── css/
+│   └── style.css           # All styles (dark theme, gold accents)
+├── js/
+│   └── script.js           # Form logic, PDF generation, WhatsApp integration
+├── backend/
+│   └── code.gs             # Google Apps Script backend (email + Drive + Sheets)
+└── README.md
+```
+
+## 🚀 Setup & Deployment
+
+### Frontend (Static Site)
+
+The frontend is pure HTML/CSS/JS with no build step. Host it on any static hosting provider:
+
+- **GitHub Pages** — push to a repo and enable Pages
+- **Netlify / Vercel** — drag and drop the project folder
+- **Any web server** — just serve the files as-is
+
+### Backend (Google Apps Script)
+
+1. Go to [Google Apps Script](https://script.google.com/)
+2. Create a new project named **"Lemaire Apprentice Backend"**
+3. Delete any default code in `Code.gs` and paste the contents of `backend/code.gs`
+4. The admin email is pre-configured to `joeljoejolemaire@gmail.com`
+5. *(Optional)* Set a `FOLDER_ID` in the script to save PDFs to a specific Google Drive folder
+6. Click **Deploy → New Deployment**
+7. Select Type: **Web App**
+8. Set **Execute as**: Me
+9. Set **Who has access**: Anyone
+10. Click **Deploy** and authorize the required permissions
+11. Copy the generated **Web App URL**
+12. Open `js/script.js` and replace `'YOUR_GOOGLE_APPS_SCRIPT_URL'` with the copied URL
+
+### WhatsApp Configuration
+
+The WhatsApp number is pre-configured in `js/script.js`:
+
+```js
+const ADMIN_WHATSAPP = '233248293815';
+```
+
+To change it, update the number (use country code without the `+`).
+
+## 📋 Submission Flow
+
+1. Applicant fills out the registration form (personal info + guardian info)
+2. On submit, the form:
+   - **Validates** all required fields
+   - **Generates** a branded PDF with all form data and the passport photo
+   - **Downloads** the PDF to the applicant's device
+   - **Sends** the data + PDF to the Google Apps Script backend (email + Drive backup)
+   - **Redirects** to WhatsApp with a pre-filled message for the admin
+3. The applicant attaches the downloaded PDF in the WhatsApp chat
+
+## 🛠 Dependencies
+
+| Dependency | Source | Purpose |
+|---|---|---|
+| [jsPDF](https://github.com/parallax/jsPDF) | CDN | Client-side PDF generation |
+| [Google Fonts](https://fonts.google.com/) | CDN | Cormorant Garamond + Josefin Sans |
+
+No `npm install` or build tools required.
+
+## 📄 License
+
+Private project for Lemaire Clothing Ventures.
